@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, ViewStyle } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigation/types";
 
 type ScreenHeaderProps = {
   title: string;
@@ -19,10 +21,15 @@ export const ScreenHeader = ({
   children,
   showBack = false,
 }: ScreenHeaderProps) => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleBack = useCallback(() => {
-    navigation.goBack();
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      navigation.navigate("Home");
+    }
   }, [navigation]);
 
   return (
@@ -53,4 +60,4 @@ export const ScreenHeader = ({
       {children}
     </View>
   );
-}
+};

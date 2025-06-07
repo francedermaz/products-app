@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
-  Home: { slug?: string };
+  Home: { slug?: string } | undefined;
   ProductDetail: { id: number };
 };
 
