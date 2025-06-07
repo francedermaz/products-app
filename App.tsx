@@ -4,6 +4,8 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Navigation from "./src/presentation/navigation";
 import { CategoriesProvider } from "./src/context/CategoriesContext";
 import { configurePushNotifications } from "./src/notifications/notifications";
+import Toast from "react-native-toast-message";
+import { toastConfig } from "./src/presentation/components/CustomToast";
 
 export default function App() {
   useEffect(() => {
@@ -15,6 +17,7 @@ export default function App() {
       <BottomSheetModalProvider>
         <CategoriesProvider>
           <Navigation />
+          <Toast config={toastConfig} />
         </CategoriesProvider>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

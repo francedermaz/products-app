@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Category } from "../domain/models/Product";
 import { ProductRepositoryImpl } from "../data/repositories/ProductRepositoryImpl";
+import { showError } from "../utils/errors";
 
 type CategoriesContextType = {
   categories: Category[];
@@ -24,7 +25,7 @@ export const CategoriesProvider = ({
   useEffect(() => {
     ProductRepositoryImpl.getCategories()
       .then(setCategories)
-      .catch(console.error);
+      .catch(() => showError("Hubo un problema al cargar las categorías."));
   }, []);
 
   const handleSelect = (cat: Category | null) => {

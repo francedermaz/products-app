@@ -10,6 +10,10 @@ export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
   const { product, loading, error } = useProductDetail(route.params.id);
   const { categories } = useCategoriesContext();
 
+  const categoryName =
+    categories.find((cat) => cat.slug === product?.category)?.name ??
+    product?.category;
+
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -18,30 +22,26 @@ export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
     );
   }
 
-  if (error || !product) {
-    return <Text>Product not found</Text>;
+  if (error) {
+    return;
   }
 
-  const categoryName =
-    categories.find((cat) => cat.slug === product.category)?.name ??
-    product.category;
-
   return (
-    <ScreenHeader title={categoryName} showBack>
+    <ScreenHeader title={categoryName ?? ""} showBack>
       <ScrollView contentContainerStyle={styles.container}>
-        <Image source={{ uri: product.thumbnail }} style={styles.image} />
+        <Image source={{ uri: product?.thumbnail }} style={styles.image} />
 
-        <Text style={styles.title}>{product.title}</Text>
-        <Text style={styles.description}>{product.description}</Text>
+        <Text style={styles.title}>{product?.title}</Text>
+        <Text style={styles.description}>{product?.description}</Text>
 
         <View style={styles.detailRow}>
           <Text style={styles.label}>Brand:</Text>
-          <Text style={styles.value}>{product.brand}</Text>
+          <Text style={styles.value}>{product?.brand}</Text>
         </View>
 
         <View style={styles.detailRow}>
           <Text style={styles.label}>Stock:</Text>
-          <Text style={styles.value}>{product.stock}</Text>
+          <Text style={styles.value}>{product?.stock}</Text>
         </View>
       </ScrollView>
     </ScreenHeader>

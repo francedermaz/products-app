@@ -3,6 +3,7 @@ import { Product } from "../../../../domain/models/Product";
 import { ProductRepositoryImpl } from "../../../../data/repositories/ProductRepositoryImpl";
 import { SortOption } from "../../../../domain/models/SortOption";
 import { sortProducts } from "../../../../utils/sortProducts";
+import { showError } from "../../../../utils/errors";
 
 export const useProducts = (
   selectedCategory: string | null,
@@ -10,11 +11,9 @@ export const useProducts = (
 ) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     setLoading(true);
-    setError(null);
 
     const fetchProducts = selectedCategory
       ? ProductRepositoryImpl.getByCategory(selectedCategory)
@@ -25,9 +24,9 @@ export const useProducts = (
         const sorted = sortProducts(data, sort);
         setProducts(sorted);
       })
-      .catch((err) => setError(err))
+      .catch(() => showError("Hubo un problema al cargar los productos."))
       .finally(() => setLoading(false));
   }, [selectedCategory, sort]);
 
-  return { products, loading, error };
+  return { products, loading };
 };
