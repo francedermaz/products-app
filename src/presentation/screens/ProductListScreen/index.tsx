@@ -1,14 +1,14 @@
 import React from "react";
-import { FlatList, View } from "react-native";
-import { Product } from "../../../domain/models/Product";
-import { ProductRepositoryImpl } from "../../../data/repositories/ProductRepositoryImpl";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import ProductCard from "./components/ProductCard";
 import SkeletonGrid from "./components/SkeletonGrid";
 import { useCategories } from "./hooks/useCategories";
 import { styles } from "./styles";
 import { ProductListScreenNavigationProp } from "../../navigation/types";
-import TagList from "../../components/TagList";
 import { useProducts } from "./hooks/useProducts";
+import ScreenHeader from "../../components/ScreenHeader";
+import TagList from "../../components/TagList";
+import { Feather } from "@expo/vector-icons";
 
 type Props = {
   navigation: ProductListScreenNavigationProp;
@@ -20,11 +20,20 @@ export default function ProductListScreen({ navigation }: Props) {
 
   return (
     <View style={styles.screen}>
-      <TagList
-        categories={categories}
-        selected={selected}
-        onSelect={handleSelect}
-      />
+      <ScreenHeader
+        title="Productos"
+        right={
+          <TouchableOpacity onPress={() => console.log("Filtrar")}>
+            <Feather name="filter" size={20} color="#333" />
+          </TouchableOpacity>
+        }
+      >
+        <TagList
+          categories={categories}
+          selected={selected}
+          onSelect={handleSelect}
+        />
+      </ScreenHeader>
 
       {loading ? (
         <View style={styles.skeleton}>

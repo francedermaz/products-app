@@ -9,16 +9,7 @@ export default function Navigation() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: {
-            backgroundColor: "#f5f5f5",
-          },
-          headerTitle: "Products",
-          headerTitleStyle: {
-            fontSize: 20,
-            fontWeight: "bold",
-            fontFamily: "System",
-          },
-          headerShadowVisible: false,
+          headerShown: false,
         }}
       >
         <Stack.Screen name="Home" component={ProductListScreen} />
