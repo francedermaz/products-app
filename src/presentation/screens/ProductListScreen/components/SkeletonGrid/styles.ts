@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const { width } = Dimensions.get("window");
-export const CARD_WIDTH = (width - 48) / 2; // 16px padding left + right + 16px gap
+const CARD_WIDTH = (width - 48) / 2;
 
 export const styles = StyleSheet.create({
   container: {
