@@ -14,9 +14,15 @@ export const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   title: {
-    fontSize: 22,
     fontWeight: "bold",
     color: "#333",
+  },
+  titleLeft: {
+    fontSize: 22,
+  },
+  titleCentered: {
+    fontSize: 20,
+    textAlign: "center",
   },
   titleCenterWrapper: {
     flex: 1,

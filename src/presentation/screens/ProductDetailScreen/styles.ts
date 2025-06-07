@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "600",
-    marginBottom: 12,
+    fontWeight: "700",
+    marginBottom: 16,
     color: "#333",
   },
   description: {
@@ -28,9 +28,9 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
   label: {
-    fontWeight: "500",
+    fontWeight: "700",
     color: "#333",
-    width: 80,
+    width: 55,
   },
   value: {
     color: "#555",
@@ -40,9 +40,5 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-  },
-  errorText: {
-    color: "red",
-    fontSize: 16,
   },
 });

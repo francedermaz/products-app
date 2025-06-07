@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, Image, ActivityIndicator, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { ProductRepositoryImpl } from "../../../data/repositories/ProductRepositoryImpl";
-import { Product } from "../../../domain/models/Product";
 import { styles } from "./styles";
 import { DetailRouteProp } from "./types";
 import ScreenHeader from "../../components/ScreenHeader";
+import { useProductDetail } from "./hooks/useProductDetail";
+import { useCategoriesContext } from "../../../context/CategoriesContext";
 
-export default function ProductDetailScreen() {
+export const ProductDetailScreen = () => {
   const route = useRoute<DetailRouteProp>();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    setLoading(true);
-    ProductRepositoryImpl.getById(route.params.id)
-      .then(setProduct)
-      .catch(setError)
-      .finally(() => setLoading(false));
-  }, [route.params.id]);
+  const { product, loading, error } = useProductDetail(route.params.id);
+  const { categories } = useCategoriesContext();
 
   if (loading) {
     return (
@@ -30,17 +21,15 @@ export default function ProductDetailScreen() {
   }
 
   if (error || !product) {
-    return (
-      <View style={styles.centered}>
-        <Text style={styles.errorText}>
-          Product not found or failed to load.
-        </Text>
-      </View>
-    );
+    return <Text>Product not found</Text>;
   }
 
+  const categoryName =
+    categories.find((cat) => cat.slug === product.category)?.name ??
+    product.category;
+
   return (
-    <ScreenHeader title={product.title} showBack>
+    <ScreenHeader title={categoryName} showBack>
       <ScrollView contentContainerStyle={styles.container}>
         <Image source={{ uri: product.thumbnail }} style={styles.image} />
 

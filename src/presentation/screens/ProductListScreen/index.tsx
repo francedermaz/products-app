@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import ProductCard from "./components/ProductCard";
 import SkeletonGrid from "./components/SkeletonGrid";
-import { useCategories } from "./hooks/useCategories";
 import { styles } from "./styles";
 import { useProducts } from "./hooks/useProducts";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -12,14 +11,15 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { FilterBottomSheet } from "./components/FilterBottomSheet";
 import { SortOption } from "../../../domain/models/SortOption";
 import { ProductListScreenProps } from "./types";
+import { useCategoriesContext } from "../../../context/CategoriesContext";
 
-export default function ProductListScreen({
+export const ProductListScreen = ({
   navigation,
-}: ProductListScreenProps) {
+}: ProductListScreenProps) => {
   const [sort, setSort] = useState<SortOption>(SortOption.PriceAsc);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
-  const { categories, selected, handleSelect } = useCategories();
+  const { categories, selected, handleSelect } = useCategoriesContext();
   const { products, loading } = useProducts(selected, sort);
 
   const handleChange = useCallback((opt: SortOption) => {

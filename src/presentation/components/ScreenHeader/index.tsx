@@ -37,7 +37,14 @@ export default function ScreenHeader({
         <View
           style={showBack ? styles.titleCenterWrapper : styles.titleLeftWrapper}
         >
-          <Text style={styles.title}>{title}</Text>
+          <Text
+            style={[
+              styles.title,
+              showBack ? styles.titleCentered : styles.titleLeft,
+            ]}
+          >
+            {title}
+          </Text>
         </View>
 
         <View>{right}</View>
