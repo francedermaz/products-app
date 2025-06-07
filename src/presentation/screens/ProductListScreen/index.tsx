@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import { ProductCard } from "./components/ProductCard";
 import { SkeletonGrid } from "./components/SkeletonGrid";
@@ -12,6 +12,7 @@ import { FilterBottomSheet } from "./components/FilterBottomSheet";
 import { SortOption } from "../../../domain/models/SortOption";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
 import { ProductListScreenProps } from "../../navigation/types";
+import { Category } from "../../../domain/models/Product";
 
 export const ProductListScreen = ({
   navigation,
@@ -20,8 +21,13 @@ export const ProductListScreen = ({
   const [sort, setSort] = useState<SortOption>(SortOption.PriceAsc);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
-  const { categories, selected, handleSelect } = useCategoriesContext();
-  const { products, loading } = useProducts(selected, sort);
+  const initialSlug = route.params?.slug;
+
+  const [currentSelectedCategory, setCurrentSelectedCategory] =
+    useState<string | null>(initialSlug || null);
+
+  const { categories } = useCategoriesContext();
+  const { products, loading } = useProducts(currentSelectedCategory, sort);
 
   const handleChange = useCallback((opt: SortOption) => {
     setSort(opt);
@@ -32,11 +38,14 @@ export const ProductListScreen = ({
     bottomSheetRef.current?.present();
   }, []);
 
-  useEffect(() => {
-    if (route.params?.slug) {
-      handleSelect({ slug: route.params.slug, name: route.params.slug });
-    }
-  }, [route.params?.slug]);
+  const handleTagSelect = useCallback(
+    (cat: Category | null) => {
+      setCurrentSelectedCategory((prev) =>
+        prev === cat?.slug ? null : cat?.slug ?? null
+      );
+    },
+    []
+  );
 
   return (
     <ScreenHeader
@@ -50,8 +59,8 @@ export const ProductListScreen = ({
       <View style={styles.screen}>
         <TagList
           categories={categories}
-          selected={selected}
-          onSelect={handleSelect}
+          selected={currentSelectedCategory}
+          onSelect={handleTagSelect}
         />
         {loading ? (
           <View style={styles.skeleton}>

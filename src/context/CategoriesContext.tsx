@@ -6,24 +6,39 @@ type CategoriesContextType = {
   categories: Category[];
   selected: string | null;
   handleSelect: (cat: Category | null) => void;
+  setSelected: (slug: string | null) => void;
 };
 
-const CategoriesContext = createContext<CategoriesContextType | undefined>(undefined);
+const CategoriesContext = createContext<CategoriesContextType | undefined>(
+  undefined
+);
 
-export const CategoriesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CategoriesProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, _setSelected] = useState<string | null>(null);
 
   useEffect(() => {
-    ProductRepositoryImpl.getCategories().then(setCategories).catch(console.error);
+    ProductRepositoryImpl.getCategories()
+      .then(setCategories)
+      .catch(console.error);
   }, []);
 
   const handleSelect = (cat: Category | null) => {
-    setSelected((prev) => (prev === cat?.slug ? null : cat?.slug ?? null));
+    _setSelected((prev) => (prev === cat?.slug ? null : cat?.slug ?? null));
+  };
+
+  const setSelected = (slug: string | null) => {
+    _setSelected(slug);
   };
 
   return (
-    <CategoriesContext.Provider value={{ categories, selected, handleSelect }}>
+    <CategoriesContext.Provider
+      value={{ categories, selected, handleSelect, setSelected }}
+    >
       {children}
     </CategoriesContext.Provider>
   );
@@ -31,6 +46,9 @@ export const CategoriesProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
 export const useCategoriesContext = () => {
   const context = useContext(CategoriesContext);
-  if (!context) throw new Error("useCategoriesContext must be used within a CategoriesProvider");
+  if (!context)
+    throw new Error(
+      "useCategoriesContext must be used within a CategoriesProvider"
+    );
   return context;
 };
