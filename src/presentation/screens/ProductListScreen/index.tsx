@@ -21,7 +21,7 @@ export default function ProductListScreen({ navigation }: Props) {
   return (
     <View style={styles.screen}>
       <ScreenHeader
-        title="Productos"
+        title="Products"
         right={
           <TouchableOpacity onPress={() => console.log("Filtrar")}>
             <Feather name="filter" size={20} color="#333" />
