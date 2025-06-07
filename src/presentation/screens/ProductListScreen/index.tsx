@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import { ProductCard } from "./components/ProductCard";
 import { SkeletonGrid } from "./components/SkeletonGrid";
@@ -10,11 +10,12 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { FilterBottomSheet } from "./components/FilterBottomSheet";
 import { SortOption } from "../../../domain/models/SortOption";
-import { ProductListScreenProps } from "./types";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
+import { ProductListScreenProps } from "../../navigation/types";
 
 export const ProductListScreen = ({
   navigation,
+  route,
 }: ProductListScreenProps) => {
   const [sort, setSort] = useState<SortOption>(SortOption.PriceAsc);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -30,6 +31,12 @@ export const ProductListScreen = ({
   const handleOpenSheet = useCallback(() => {
     bottomSheetRef.current?.present();
   }, []);
+
+  useEffect(() => {
+    if (route.params?.slug) {
+      handleSelect({ slug: route.params.slug, name: route.params.slug });
+    }
+  }, [route.params?.slug]);
 
   return (
     <ScreenHeader
@@ -77,4 +84,4 @@ export const ProductListScreen = ({
       </View>
     </ScreenHeader>
   );
-}
+};

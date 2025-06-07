@@ -1,14 +1,12 @@
 import React from "react";
 import { View, Text, Image, ActivityIndicator, ScrollView } from "react-native";
-import { useRoute } from "@react-navigation/native";
 import { styles } from "./styles";
-import { DetailRouteProp } from "./types";
 import { ScreenHeader } from "../../components/ScreenHeader";
 import { useProductDetail } from "./hooks/useProductDetail";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
+import { ProductDetailScreenProps } from "../../navigation/types";
 
-export const ProductDetailScreen = () => {
-  const route = useRoute<DetailRouteProp>();
+export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
   const { product, loading, error } = useProductDetail(route.params.id);
   const { categories } = useCategoriesContext();
 
@@ -48,4 +46,4 @@ export const ProductDetailScreen = () => {
       </ScrollView>
     </ScreenHeader>
   );
-}
+};

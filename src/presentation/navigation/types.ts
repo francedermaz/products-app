@@ -1,16 +1,16 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
-  Home: undefined;
+  Home: { slug?: string };
   ProductDetail: { id: number };
 };
 
-export type ProductListScreenNavigationProp = NativeStackNavigationProp<
+export type ProductListScreenProps = NativeStackScreenProps<
   RootStackParamList,
   "Home"
 >;
 
-export type ProductDetailScreenNavigationProp = NativeStackNavigationProp<
+export type ProductDetailScreenProps = NativeStackScreenProps<
   RootStackParamList,
   "ProductDetail"
 >;
