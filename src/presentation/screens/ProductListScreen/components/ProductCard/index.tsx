@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { ProductCardProps } from "../../types";
 
-export default function ProductCard({ product, onPress }: ProductCardProps) {
+export const ProductCard = ({ product, onPress }: ProductCardProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.card}>
       <Image source={{ uri: product.thumbnail }} style={styles.image} />

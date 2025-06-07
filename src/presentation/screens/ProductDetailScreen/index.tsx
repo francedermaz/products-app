@@ -3,7 +3,7 @@ import { View, Text, Image, ActivityIndicator, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { styles } from "./styles";
 import { DetailRouteProp } from "./types";
-import ScreenHeader from "../../components/ScreenHeader";
+import { ScreenHeader } from "../../components/ScreenHeader";
 import { useProductDetail } from "./hooks/useProductDetail";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
 

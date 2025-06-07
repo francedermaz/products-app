@@ -12,13 +12,13 @@ type ScreenHeaderProps = {
   showBack?: boolean;
 };
 
-export default function ScreenHeader({
+export const ScreenHeader = ({
   title,
   right,
   style,
   children,
   showBack = false,
-}: ScreenHeaderProps) {
+}: ScreenHeaderProps) => {
   const navigation = useNavigation();
 
   const handleBack = useCallback(() => {

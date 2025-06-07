@@ -1,11 +1,11 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import Skeleton from "../../../../components/Skeleton";
+import { Skeleton } from "../../../../components/Skeleton";
 import { styles } from "./styles";
 
 const data = Array.from({ length: 6 });
 
-export default function SkeletonGrid() {
+export const SkeletonGrid = () => {
   return (
     <FlatList
       data={data}

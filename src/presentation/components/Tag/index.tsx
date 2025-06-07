@@ -2,13 +2,13 @@ import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { styles } from "./styles";
 
-type Props = {
+type TagProps = {
   label: string;
   selected: boolean;
   onPress: () => void;
 };
 
-export default function Tag({ label, selected, onPress }: Props) {
+export const Tag = ({ label, selected, onPress }: TagProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}

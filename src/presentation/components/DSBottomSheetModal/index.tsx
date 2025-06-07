@@ -6,13 +6,13 @@ import {
 } from "@gorhom/bottom-sheet";
 import { ViewStyle } from "react-native";
 
-type Props = {
+type DSBottomSheetModalProps = {
   children: React.ReactNode;
   snapPoints?: string[];
   style?: ViewStyle;
 };
 
-export const DSBottomSheetModal = forwardRef<BottomSheetModal, Props>(
+export const DSBottomSheetModal = forwardRef<BottomSheetModal, DSBottomSheetModalProps>(
   ({ children, snapPoints = ["40%"], style }, ref) => {
     const memoizedSnapPoints = useMemo(() => snapPoints, [snapPoints]);
 

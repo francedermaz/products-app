@@ -1,15 +1,15 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import Tag from "../Tag";
+import { Tag } from "../Tag";
 import { Category } from "../../../domain/models/Product";
 
-type Props = {
+type TagListProps = {
   categories: Category[];
   selected: string | null;
   onSelect: (cat: Category | null) => void;
 };
 
-export default function TagList({ categories, selected, onSelect }: Props) {
+export const TagList = ({ categories, selected, onSelect }: TagListProps) => {
   return (
     <ScrollView
       horizontal

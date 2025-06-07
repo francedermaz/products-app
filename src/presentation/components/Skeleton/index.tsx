@@ -7,19 +7,19 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 
-type Props = {
+type SkeletonProps = {
   width: DimensionValue;
   height: DimensionValue;
   borderRadius?: number;
   style?: StyleProp<ViewStyle>;
 };
 
-export default function Skeleton({
+export const Skeleton = ({
   width,
   height,
   borderRadius = 8,
   style,
-}: Props) {
+}: SkeletonProps) => {
   const opacity = useRef(new Animated.Value(0.6)).current;
 
   useEffect(() => {

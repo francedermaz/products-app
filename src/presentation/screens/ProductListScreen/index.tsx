@@ -1,11 +1,11 @@
 import React, { useCallback, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import ProductCard from "./components/ProductCard";
-import SkeletonGrid from "./components/SkeletonGrid";
+import { ProductCard } from "./components/ProductCard";
+import { SkeletonGrid } from "./components/SkeletonGrid";
 import { styles } from "./styles";
 import { useProducts } from "./hooks/useProducts";
-import ScreenHeader from "../../components/ScreenHeader";
-import TagList from "../../components/TagList";
+import { ScreenHeader } from "../../components/ScreenHeader";
+import { TagList } from "../../components/TagList";
 import { MaterialIcons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { FilterBottomSheet } from "./components/FilterBottomSheet";
