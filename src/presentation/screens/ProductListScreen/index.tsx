@@ -30,7 +30,9 @@ export default function ProductListScreen({ navigation }: Props) {
     <FlatList
       data={products}
       keyExtractor={(p) => p.id.toString()}
+      numColumns={2}
       contentContainerStyle={styles.list}
+      columnWrapperStyle={{ justifyContent: "space-between" }}
       renderItem={({ item }) => (
         <ProductCard
           product={item}
