@@ -12,7 +12,7 @@ export default function Navigation() {
           headerStyle: {
             backgroundColor: "#f5f5f5",
           },
-          headerTitle: "Productos",
+          headerTitle: "Products",
           headerTitleStyle: {
             fontSize: 20,
             fontWeight: "bold",

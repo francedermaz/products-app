@@ -1,6 +1,7 @@
 import { ProductRepository } from "../../domain/repositories/ProductRepository";
 import { mapApiToProduct } from "../mappers/ProductMapper";
 import { ProductApi } from "../datasources/ProductApi";
+import { CategoryApiResponse } from "../dtos/ProductApiResponse";
 
 export const ProductRepositoryImpl: ProductRepository = {
   getAll: async () => {
@@ -11,6 +12,9 @@ export const ProductRepositoryImpl: ProductRepository = {
     const data = await ProductApi.getByCategory(cat);
     return data.products.map(mapApiToProduct);
   },
-  getCategories: async () => ProductApi.getCategories(),
+  getCategories: async () => {
+    const data: CategoryApiResponse[] = await ProductApi.getCategories();
+    return data.map((c) => c.slug);
+  },
   getById: async (id: number) => mapApiToProduct(await ProductApi.getById(id)),
 };

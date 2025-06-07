@@ -9,3 +9,9 @@ export type ProductApiResponse = {
   thumbnail: string;
   stock: number;
 };
+
+export type CategoryApiResponse = {
+  name: string;
+  slug: string;
+  url: string;
+};
