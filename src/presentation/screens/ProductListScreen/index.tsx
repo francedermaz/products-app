@@ -12,7 +12,7 @@ import { FilterBottomSheet } from "./components/FilterBottomSheet";
 import { SortOption } from "../../../domain/models/SortOption";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
 import { ProductListScreenProps } from "../../navigation/types";
-import { Category } from "../../../domain/models/Product";
+import { Category, Product } from "../../../domain/models/Product";
 import { RefreshControl } from "react-native-gesture-handler";
 
 export const ProductListScreen = ({
@@ -49,6 +49,16 @@ export const ProductListScreen = ({
     );
   }, []);
 
+  const handleRenderItem = useCallback(
+    ({ item }: { item: Product }) => (
+      <ProductCard
+        product={item}
+        onPress={() => navigation.navigate("ProductDetail", { id: item.id })}
+      />
+    ),
+    [navigation]
+  );
+
   return (
     <ScreenHeader
       title="Products"
@@ -76,14 +86,7 @@ export const ProductListScreen = ({
             columnWrapperStyle={{ justifyContent: "space-between" }}
             contentContainerStyle={styles.list}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <ProductCard
-                product={item}
-                onPress={() =>
-                  navigation.navigate("ProductDetail", { id: item.id })
-                }
-              />
-            )}
+            renderItem={handleRenderItem}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}

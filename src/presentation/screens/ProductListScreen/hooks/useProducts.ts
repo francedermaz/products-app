@@ -26,16 +26,16 @@ export const useProducts = (
     }
   }, [selectedCategory, sort]);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch().finally(() => setLoading(false));
-  }, [fetch]);
-
   const refetch = async () => {
     setRefreshing(true);
     await fetch();
     setRefreshing(false);
   };
+
+  useEffect(() => {
+    setLoading(true);
+    fetch().finally(() => setLoading(false));
+  }, [fetch]);
 
   return {
     products,
