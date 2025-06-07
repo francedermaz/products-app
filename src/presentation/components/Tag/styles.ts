@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     marginRight: 8,
   },
   selectedTag: {
-    backgroundColor: "#333",
+    backgroundColor: "#C21807",
   },
   tagText: {
     fontSize: 14,
