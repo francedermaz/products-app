@@ -1,6 +1,7 @@
 import { Product } from "../../domain/models/Product";
+import { ProductApiResponse } from "../dtos/ProductApiResponse";
 
-export const mapApiToProduct = (api: any): Product => ({
+export const mapApiToProduct = (api: ProductApiResponse): Product => ({
   id: api.id,
   title: api.title,
   description: api.description,
