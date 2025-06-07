@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FlatList, View } from "react-native";
 import { Product } from "../../../domain/models/Product";
 import { ProductRepositoryImpl } from "../../../data/repositories/ProductRepositoryImpl";
@@ -18,25 +18,30 @@ export default function ProductListScreen({ navigation }: Props) {
   const { categories, selected, handleSelect } = useCategories();
   const { products, loading } = useProducts(selected);
 
-  if (loading) return <SkeletonGrid />;
-
   return (
-    <FlatList
-      data={products}
-      keyExtractor={(p) => p.id.toString()}
-      numColumns={2}
-      ListHeaderComponent={
-        <TagList
-          categories={categories}
-          selected={selected}
-          onSelect={handleSelect}
+    <View style={styles.screen}>
+      <TagList
+        categories={categories}
+        selected={selected}
+        onSelect={handleSelect}
+      />
+
+      {loading ? (
+        <View style={styles.skeleton}>
+          <SkeletonGrid />
+        </View>
+      ) : (
+        <FlatList
+          data={products}
+          keyExtractor={(p) => p.id.toString()}
+          numColumns={2}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+          contentContainerStyle={styles.list}
+          renderItem={({ item }) => (
+            <ProductCard product={item} onPress={() => undefined} />
+          )}
         />
-      }
-      columnWrapperStyle={{ justifyContent: "space-between" }}
-      contentContainerStyle={styles.list}
-      renderItem={({ item }) => (
-        <ProductCard product={item} onPress={() => undefined} />
       )}
-    />
+    </View>
   );
 }

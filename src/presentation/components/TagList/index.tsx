@@ -14,7 +14,7 @@ export default function TagList({ categories, selected, onSelect }: Props) {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={{ paddingHorizontal: 16, paddingBottom: 8 }}
+      style={{ paddingHorizontal: 16, paddingBottom: 12 }}
     >
       <Tag
         label="All"
