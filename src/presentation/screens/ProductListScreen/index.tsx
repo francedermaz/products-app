@@ -8,7 +8,7 @@ import { ProductListScreenNavigationProp } from "../../navigation/types";
 import { useProducts } from "./hooks/useProducts";
 import ScreenHeader from "../../components/ScreenHeader";
 import TagList from "../../components/TagList";
-import { Feather } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { FilterBottomSheet } from "./components/FilterBottomSheet";
 import { SortOption } from "../../../domain/models/SortOption";
@@ -39,7 +39,7 @@ export default function ProductListScreen({ navigation }: Props) {
         title="Products"
         right={
           <TouchableOpacity onPress={handleOpenSheet}>
-            <Feather name="filter" size={20} color="#333" />
+            <MaterialIcons name="sort" size={20} color="#333" />
           </TouchableOpacity>
         }
       >

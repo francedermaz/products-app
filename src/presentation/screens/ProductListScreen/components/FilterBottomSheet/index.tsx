@@ -1,9 +1,10 @@
-import React, { forwardRef } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import React, { forwardRef, useCallback } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { DSBottomSheetModal } from "../../../../components/DSBottomSheetModal";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { SortOption } from "../../../../../domain/models/SortOption";
+import { FlatList } from "react-native-gesture-handler";
 
 type Props = {
   selectedOption: SortOption;
@@ -19,25 +20,42 @@ const options: { label: string; value: SortOption }[] = [
 
 export const FilterBottomSheet = forwardRef<BottomSheetModal, Props>(
   ({ selectedOption, onChange }, ref) => {
-    return (
-      <DSBottomSheetModal ref={ref} style={styles.contentContainer}>
-        <Text style={styles.title}>Sort By</Text>
-        {options.map(({ label, value }) => (
+    const renderSortItem = useCallback(
+      ({ item }: { item: (typeof options)[number] }) => (
+        <View>
           <TouchableOpacity
-            key={value}
-            onPress={() => onChange(value)}
+            onPress={() => onChange(item.value)}
             style={styles.option}
           >
             <Text
               style={[
                 styles.label,
-                selectedOption === value && styles.selected,
+                selectedOption === item.value && styles.selected,
               ]}
             >
-              {label}
+              {item.label}
             </Text>
           </TouchableOpacity>
-        ))}
+        </View>
+      ),
+      [onChange, selectedOption]
+    );
+
+    return (
+      <DSBottomSheetModal
+        ref={ref}
+        style={styles.contentContainer}
+        snapPoints={["35%"]}
+      >
+        <Text style={styles.title}>Sort By</Text>
+
+        <FlatList
+          data={options}
+          keyExtractor={(item) => item.value}
+          renderItem={renderSortItem}
+          scrollEnabled={false}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+        />
       </DSBottomSheetModal>
     );
   }

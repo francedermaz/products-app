@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   contentContainer: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
     backgroundColor: "#fff",
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
@@ -15,8 +16,6 @@ export const styles = StyleSheet.create({
   },
   option: {
     paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
   },
   selected: {
     fontWeight: "bold",
@@ -25,5 +24,9 @@ export const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     color: "#333",
+  },
+  separator: {
+    height: 1,
+    backgroundColor: "#eee",
   },
 });
