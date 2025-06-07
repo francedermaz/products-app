@@ -14,7 +14,7 @@ export const ProductRepositoryImpl: ProductRepository = {
   },
   getCategories: async () => {
     const data: CategoryApiResponse[] = await ProductApi.getCategories();
-    return data.map((c) => c.slug);
+    return data.map(({ name, slug }) => ({ name, slug }));
   },
   getById: async (id: number) => mapApiToProduct(await ProductApi.getById(id)),
 };

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { ProductRepositoryImpl } from "../../../../data/repositories/ProductRepositoryImpl";
+import { Category } from "../../../../domain/models/Product";
 
 export function useCategories() {
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
@@ -11,11 +12,9 @@ export function useCategories() {
       .catch(console.error);
   }, []);
 
-  const handleSelect = (cat: string | null) => {
-    setSelected((prev) => (prev === cat ? null : cat));
+  const handleSelect = (cat: Category | null) => {
+    setSelected((prev) => (prev === cat?.slug ? null : cat?.slug ?? null));
   };
-
-  console.log(categories);
 
   return { categories, selected, handleSelect };
 }

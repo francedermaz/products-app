@@ -1,8 +1,8 @@
-import { Product } from "../models/Product";
+import { Product, Category } from "../models/Product";
 
 export interface ProductRepository {
   getAll(): Promise<Product[]>;
   getByCategory(category: string): Promise<Product[]>;
-  getCategories(): Promise<string[]>;
+  getCategories(): Promise<Category[]>;
   getById(id: number): Promise<Product>;
 }

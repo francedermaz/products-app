@@ -1,11 +1,12 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
 import Tag from "../Tag";
+import { Category } from "../../../domain/models/Product";
 
 type Props = {
-  categories: string[];
+  categories: Category[];
   selected: string | null;
-  onSelect: (cat: string | null) => void;
+  onSelect: (cat: Category | null) => void;
 };
 
 export default function TagList({ categories, selected, onSelect }: Props) {
@@ -22,9 +23,9 @@ export default function TagList({ categories, selected, onSelect }: Props) {
       />
       {categories.map((cat) => (
         <Tag
-          key={cat}
-          label={cat}
-          selected={selected === cat}
+          key={cat.slug}
+          label={cat.name}
+          selected={selected === cat.slug}
           onPress={() => onSelect(cat)}
         />
       ))}

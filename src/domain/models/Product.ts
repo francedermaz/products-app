@@ -9,3 +9,8 @@ export interface Product {
   thumbnail: string;
   stock: number;
 }
+
+export interface Category {
+  name: string;
+  slug: string;
+}
