@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     marginTop: 12,
   },
   list: {
-    paddingHorizontal: 16,
     paddingTop: 12,
   },
   skeleton: {

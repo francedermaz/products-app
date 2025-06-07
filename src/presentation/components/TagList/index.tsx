@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import Tag from "../Tag";
 import { Category } from "../../../domain/models/Product";
 

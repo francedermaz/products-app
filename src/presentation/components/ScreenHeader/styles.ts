@@ -5,18 +5,25 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 8,
     backgroundColor: "#f5f5f5",
-    marginTop: 44,
+    marginTop: 50,
   },
   row: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 16,
-    paddingBottom: 20,
+    paddingBottom: 8,
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     color: "#333",
+  },
+  titleCenterWrapper: {
+    flex: 1,
+    alignItems: "center",
+  },
+  titleLeftWrapper: {
+    flex: 1,
+    alignItems: "flex-start",
   },
 });

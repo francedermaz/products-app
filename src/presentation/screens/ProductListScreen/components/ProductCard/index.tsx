@@ -1,14 +1,9 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import { Product } from "../../../../../domain/models/Product";
 import { styles } from "./styles";
+import { ProductCardProps } from "../../types";
 
-type Props = {
-  product: Product;
-  onPress: () => void;
-};
-
-export default function ProductCard({ product, onPress }: Props) {
+export default function ProductCard({ product, onPress }: ProductCardProps) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.card}>
       <Image source={{ uri: product.thumbnail }} style={styles.image} />
@@ -21,4 +16,3 @@ export default function ProductCard({ product, onPress }: Props) {
     </TouchableOpacity>
   );
 }
-

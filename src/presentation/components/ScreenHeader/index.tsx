@@ -1,21 +1,48 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View, Text, TouchableOpacity, ViewStyle } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import { styles } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
-type Props = {
+type ScreenHeaderProps = {
   title: string;
   right?: React.ReactNode;
   style?: ViewStyle;
   children?: React.ReactNode;
+  showBack?: boolean;
 };
 
-export default function ScreenHeader({ title, right, style, children }: Props) {
+export default function ScreenHeader({
+  title,
+  right,
+  style,
+  children,
+  showBack = false,
+}: ScreenHeaderProps) {
+  const navigation = useNavigation();
+
+  const handleBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
   return (
     <View style={[styles.container, style]}>
       <View style={styles.row}>
-        <Text style={styles.title}>{title}</Text>
-        {right && <View>{right}</View>}
+        {showBack && (
+          <TouchableOpacity onPress={handleBack}>
+            <Feather name="arrow-left" size={24} color="#333" />
+          </TouchableOpacity>
+        )}
+
+        <View
+          style={showBack ? styles.titleCenterWrapper : styles.titleLeftWrapper}
+        >
+          <Text style={styles.title}>{title}</Text>
+        </View>
+
+        <View>{right}</View>
       </View>
+
       {children}
     </View>
   );

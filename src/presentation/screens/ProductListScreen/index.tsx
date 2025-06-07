@@ -4,7 +4,6 @@ import ProductCard from "./components/ProductCard";
 import SkeletonGrid from "./components/SkeletonGrid";
 import { useCategories } from "./hooks/useCategories";
 import { styles } from "./styles";
-import { ProductListScreenNavigationProp } from "../../navigation/types";
 import { useProducts } from "./hooks/useProducts";
 import ScreenHeader from "../../components/ScreenHeader";
 import TagList from "../../components/TagList";
@@ -12,12 +11,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { FilterBottomSheet } from "./components/FilterBottomSheet";
 import { SortOption } from "../../../domain/models/SortOption";
+import { ProductListScreenProps } from "./types";
 
-type Props = {
-  navigation: ProductListScreenNavigationProp;
-};
-
-export default function ProductListScreen({ navigation }: Props) {
+export default function ProductListScreen({
+  navigation,
+}: ProductListScreenProps) {
   const [sort, setSort] = useState<SortOption>(SortOption.PriceAsc);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
@@ -34,44 +32,49 @@ export default function ProductListScreen({ navigation }: Props) {
   }, []);
 
   return (
-    <View style={styles.screen}>
-      <ScreenHeader
-        title="Products"
-        right={
-          <TouchableOpacity onPress={handleOpenSheet}>
-            <MaterialIcons name="sort" size={20} color="#333" />
-          </TouchableOpacity>
-        }
-      >
+    <ScreenHeader
+      title="Products"
+      right={
+        <TouchableOpacity onPress={handleOpenSheet}>
+          <MaterialIcons name="sort" size={20} color="#333" />
+        </TouchableOpacity>
+      }
+    >
+      <View style={styles.screen}>
         <TagList
           categories={categories}
           selected={selected}
           onSelect={handleSelect}
         />
-      </ScreenHeader>
+        {loading ? (
+          <View style={styles.skeleton}>
+            <SkeletonGrid />
+          </View>
+        ) : (
+          <FlatList
+            data={products}
+            keyExtractor={(p) => p.id.toString()}
+            numColumns={2}
+            columnWrapperStyle={{ justifyContent: "space-between" }}
+            contentContainerStyle={styles.list}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <ProductCard
+                product={item}
+                onPress={() =>
+                  navigation.navigate("ProductDetail", { id: item.id })
+                }
+              />
+            )}
+          />
+        )}
 
-      {loading ? (
-        <View style={styles.skeleton}>
-          <SkeletonGrid />
-        </View>
-      ) : (
-        <FlatList
-          data={products}
-          keyExtractor={(p) => p.id.toString()}
-          numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
-          contentContainerStyle={styles.list}
-          renderItem={({ item }) => (
-            <ProductCard product={item} onPress={() => undefined} />
-          )}
+        <FilterBottomSheet
+          ref={bottomSheetRef}
+          selectedOption={sort}
+          onChange={handleChange}
         />
-      )}
-
-      <FilterBottomSheet
-        ref={bottomSheetRef}
-        selectedOption={sort}
-        onChange={handleChange}
-      />
-    </View>
+      </View>
+    </ScreenHeader>
   );
 }
