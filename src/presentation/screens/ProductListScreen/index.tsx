@@ -13,6 +13,7 @@ import { SortOption } from "../../../domain/models/SortOption";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
 import { ProductListScreenProps } from "../../navigation/types";
 import { Category } from "../../../domain/models/Product";
+import { RefreshControl } from "react-native-gesture-handler";
 
 export const ProductListScreen = ({
   navigation,
@@ -23,11 +24,15 @@ export const ProductListScreen = ({
 
   const initialSlug = route.params?.slug;
 
-  const [currentSelectedCategory, setCurrentSelectedCategory] =
-    useState<string | null>(initialSlug || null);
+  const [currentSelectedCategory, setCurrentSelectedCategory] = useState<
+    string | null
+  >(initialSlug || null);
 
   const { categories } = useCategoriesContext();
-  const { products, loading } = useProducts(currentSelectedCategory, sort);
+  const { products, loading, refreshing, refetch } = useProducts(
+    currentSelectedCategory,
+    sort
+  );
 
   const handleChange = useCallback((opt: SortOption) => {
     setSort(opt);
@@ -38,14 +43,11 @@ export const ProductListScreen = ({
     bottomSheetRef.current?.present();
   }, []);
 
-  const handleTagSelect = useCallback(
-    (cat: Category | null) => {
-      setCurrentSelectedCategory((prev) =>
-        prev === cat?.slug ? null : cat?.slug ?? null
-      );
-    },
-    []
-  );
+  const handleTagSelect = useCallback((cat: Category | null) => {
+    setCurrentSelectedCategory((prev) =>
+      prev === cat?.slug ? null : cat?.slug ?? null
+    );
+  }, []);
 
   return (
     <ScreenHeader
@@ -82,6 +84,14 @@ export const ProductListScreen = ({
                 }
               />
             )}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={refetch}
+                colors={["#ff5252"]}
+                tintColor="#ff5252"
+              />
+            }
           />
         )}
 

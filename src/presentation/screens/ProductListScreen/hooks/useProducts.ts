@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Product } from "../../../../domain/models/Product";
 import { ProductRepositoryImpl } from "../../../../data/repositories/ProductRepositoryImpl";
 import { SortOption } from "../../../../domain/models/SortOption";
@@ -11,22 +11,36 @@ export const useProducts = (
 ) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const fetch = useCallback(async () => {
+    try {
+      const data = selectedCategory
+        ? await ProductRepositoryImpl.getByCategory(selectedCategory)
+        : await ProductRepositoryImpl.getAll();
+
+      const sorted = sortProducts(data, sort);
+      setProducts(sorted);
+    } catch (e) {
+      showError("Hubo un problema al cargar los productos.");
+    }
+  }, [selectedCategory, sort]);
 
   useEffect(() => {
     setLoading(true);
+    fetch().finally(() => setLoading(false));
+  }, [fetch]);
 
-    const fetchProducts = selectedCategory
-      ? ProductRepositoryImpl.getByCategory(selectedCategory)
-      : ProductRepositoryImpl.getAll();
+  const refetch = async () => {
+    setRefreshing(true);
+    await fetch();
+    setRefreshing(false);
+  };
 
-    fetchProducts
-      .then((data) => {
-        const sorted = sortProducts(data, sort);
-        setProducts(sorted);
-      })
-      .catch(() => showError("Hubo un problema al cargar los productos."))
-      .finally(() => setLoading(false));
-  }, [selectedCategory, sort]);
-
-  return { products, loading };
+  return {
+    products,
+    loading,
+    refreshing,
+    refetch,
+  };
 };
