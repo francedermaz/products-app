@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   tag: {
     paddingHorizontal: 12,
     paddingVertical: 6,
-    backgroundColor: "#eee",
+    backgroundColor: "#e0e0e0",
     borderRadius: 16,
     marginRight: 8,
   },
