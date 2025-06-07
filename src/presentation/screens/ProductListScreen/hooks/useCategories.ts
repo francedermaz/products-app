@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ProductRepositoryImpl } from "../../../../data/repositories/ProductRepositoryImpl";
 import { Category } from "../../../../domain/models/Product";
 
-export function useCategories() {
+export const useCategories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -17,4 +17,4 @@ export function useCategories() {
   };
 
   return { categories, selected, handleSelect };
-}
+};

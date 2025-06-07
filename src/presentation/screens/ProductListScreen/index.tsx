@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import ProductCard from "./components/ProductCard";
 import SkeletonGrid from "./components/SkeletonGrid";
@@ -9,21 +9,36 @@ import { useProducts } from "./hooks/useProducts";
 import ScreenHeader from "../../components/ScreenHeader";
 import TagList from "../../components/TagList";
 import { Feather } from "@expo/vector-icons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { FilterBottomSheet } from "./components/FilterBottomSheet";
+import { SortOption } from "../../../domain/models/SortOption";
 
 type Props = {
   navigation: ProductListScreenNavigationProp;
 };
 
 export default function ProductListScreen({ navigation }: Props) {
+  const [sort, setSort] = useState<SortOption>(SortOption.PriceAsc);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+
   const { categories, selected, handleSelect } = useCategories();
-  const { products, loading } = useProducts(selected);
+  const { products, loading } = useProducts(selected, sort);
+
+  const handleChange = useCallback((opt: SortOption) => {
+    setSort(opt);
+    bottomSheetRef.current?.close();
+  }, []);
+
+  const handleOpenSheet = useCallback(() => {
+    bottomSheetRef.current?.present();
+  }, []);
 
   return (
     <View style={styles.screen}>
       <ScreenHeader
         title="Products"
         right={
-          <TouchableOpacity onPress={() => console.log("Filtrar")}>
+          <TouchableOpacity onPress={handleOpenSheet}>
             <Feather name="filter" size={20} color="#333" />
           </TouchableOpacity>
         }
@@ -51,6 +66,12 @@ export default function ProductListScreen({ navigation }: Props) {
           )}
         />
       )}
+
+      <FilterBottomSheet
+        ref={bottomSheetRef}
+        selectedOption={sort}
+        onChange={handleChange}
+      />
     </View>
   );
 }
