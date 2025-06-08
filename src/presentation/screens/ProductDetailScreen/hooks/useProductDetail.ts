@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../../../../domain/models/Product";
 import { ProductRepositoryImpl } from "../../../../data/repositories/ProductRepositoryImpl";
-import { notifyLowStock } from "../../../../notifications/lowStockNotifier";
 import { showError } from "../../../../utils/errors";
 import { useNavigation } from "@react-navigation/native";
 import { ProductDetailScreenProps } from "../../../navigation/types";
@@ -13,7 +12,6 @@ export const useProductDetail = (productId: number) => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const notifiedRef = useRef(false);
 
   const navigation = useNavigation<ProductDetailScreenProps["navigation"]>();
 
@@ -32,13 +30,6 @@ export const useProductDetail = (productId: number) => {
       })
       .finally(() => setLoading(false));
   }, [productId]);
-
-  useEffect(() => {
-    if (product && product.stock < 10 && !notifiedRef.current) {
-      notifyLowStock(product.title, product.stock);
-      notifiedRef.current = true;
-    }
-  }, [product]);
 
   return { product, loading, error };
 };
