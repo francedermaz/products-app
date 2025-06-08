@@ -14,6 +14,7 @@ import { useCategoriesContext } from "../../../context/CategoriesContext";
 import { ProductListScreenProps } from "../../navigation/types";
 import { Category, Product } from "../../../domain/models/Product";
 import { RefreshControl } from "react-native-gesture-handler";
+import { colors } from "../../../theme/colors";
 
 export const ProductListScreen = ({
   navigation,
@@ -64,7 +65,7 @@ export const ProductListScreen = ({
       title="Products"
       right={
         <TouchableOpacity onPress={handleOpenSheet}>
-          <MaterialIcons name="sort" size={20} color="#333" />
+          <MaterialIcons name="sort" size={20} color={colors.textPrimary} />
         </TouchableOpacity>
       }
     >
@@ -91,8 +92,8 @@ export const ProductListScreen = ({
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={refetch}
-                colors={["#ff5252"]}
-                tintColor="#ff5252"
+                colors={[colors.refreshColor]}
+                tintColor={colors.refreshColor}
               />
             }
           />

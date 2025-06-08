@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
   skeleton: {
-    backgroundColor: "#E0E0E0",
+    backgroundColor: colors.skeletonBackground,
   },
 });

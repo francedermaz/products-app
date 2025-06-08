@@ -5,6 +5,7 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
+import { colors } from "../../../theme/colors";
 
 type ScreenHeaderProps = {
   title: string;
@@ -37,7 +38,7 @@ export const ScreenHeader = ({
       <View style={styles.row}>
         {showBack && (
           <TouchableOpacity onPress={handleBack}>
-            <Feather name="arrow-left" size={24} color="#333" />
+            <Feather name="arrow-left" size={24} color={colors.textPrimary} />
           </TouchableOpacity>
         )}
 

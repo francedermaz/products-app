@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingBottom: 8,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.gray50,
     marginTop: 50,
   },
   row: {
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
-    color: "#333",
+    color: colors.textPrimary,
   },
   titleLeft: {
     fontSize: 22,

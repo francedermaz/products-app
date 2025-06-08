@@ -1,17 +1,18 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "flex-start",
-    backgroundColor: "#FFEBEE",
-    borderLeftColor: "#D32F2F",
+    backgroundColor: colors.toastBackground,
+    borderLeftColor: colors.primaryRed,
     borderLeftWidth: 4,
     padding: 12,
     borderRadius: 8,
     marginHorizontal: 16,
     marginTop: 10,
-    shadowColor: "#000",
+    shadowColor: colors.shadow,
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
@@ -23,11 +24,11 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#D32F2F",
+    color: colors.primaryRed,
   },
   message: {
     fontSize: 14,
-    color: "#555",
+    color: colors.textMuted,
     marginTop: 2,
   },
 });

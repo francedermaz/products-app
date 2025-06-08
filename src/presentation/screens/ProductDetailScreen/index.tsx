@@ -5,6 +5,7 @@ import { ScreenHeader } from "../../components/ScreenHeader";
 import { useProductDetail } from "./hooks/useProductDetail";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
 import { ProductDetailScreenProps } from "../../navigation/types";
+import { colors } from "../../../theme/colors";
 
 export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
   const { product, loading, error } = useProductDetail(route.params.id);
@@ -17,7 +18,7 @@ export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
   if (loading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#333" />
+        <ActivityIndicator size="large" color={colors.textPrimary} />
       </View>
     );
   }
@@ -25,8 +26,6 @@ export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
   if (error) {
     return;
   }
-
-  console.log(product);
 
   return (
     <ScreenHeader title={categoryName ?? ""} showBack>

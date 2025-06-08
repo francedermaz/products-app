@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../../../theme/colors";
 
 export const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: "#fff",
+    backgroundColor: colors.textOnDark,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
@@ -12,21 +13,21 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     marginBottom: 16,
-    color: "#333",
+    color: colors.textPrimary,
   },
   option: {
     paddingVertical: 12,
   },
   selected: {
     fontWeight: "bold",
-    color: "#007AFF",
+    color: colors.primaryBlue,
   },
   label: {
     fontSize: 16,
-    color: "#333",
+    color: colors.textPrimary,
   },
   separator: {
     height: 1,
-    backgroundColor: "#eee",
+    backgroundColor: colors.gray100,
   },
 });

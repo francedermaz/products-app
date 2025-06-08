@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: colors.textOnDark,
     marginTop: 16,
   },
   image: {
@@ -17,11 +18,11 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     marginBottom: 16,
-    color: "#333",
+    color: colors.textPrimary,
   },
   description: {
     fontSize: 16,
-    color: "#666",
+    color: colors.textSecondary,
     marginBottom: 20,
   },
   detailRow: {
@@ -30,11 +31,11 @@ export const styles = StyleSheet.create({
   },
   label: {
     fontWeight: "700",
-    color: "#333",
+    color: colors.textPrimary,
     width: 55,
   },
   value: {
-    color: "#555",
+    color: colors.textMuted,
   },
   centered: {
     flex: 1,
@@ -51,6 +52,6 @@ export const styles = StyleSheet.create({
   priceText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#222",
+    color: colors.gray900,
   },
 });
