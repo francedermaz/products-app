@@ -7,6 +7,16 @@ import { configurePushNotifications } from "./src/notifications/notifications";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "./src/presentation/components/CustomToast";
 import "./src/locales/i18n";
+import * as Notifications from "expo-notifications";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
 
 export default function App() {
   useEffect(() => {

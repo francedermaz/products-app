@@ -20,5 +20,11 @@
   },
   "Categories": {
     "error": "There was a problem loading the categories. Please try again."
+  },
+  "notifications": {
+    "welcome": {
+      "title": "👋 Welcome to products app!",
+      "body": "Explore everything you can do. 🎉"
+    }
   }
 }
