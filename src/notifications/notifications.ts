@@ -4,7 +4,6 @@ import { Platform } from "react-native";
 export async function configurePushNotifications() {
   const { status } = await Notifications.requestPermissionsAsync();
   if (status !== "granted") {
-    console.log("Push notification permissions not granted.");
     return;
   }
 
