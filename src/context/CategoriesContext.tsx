@@ -25,7 +25,11 @@ export const CategoriesProvider = ({
   useEffect(() => {
     ProductRepositoryImpl.getCategories()
       .then(setCategories)
-      .catch(() => showError("Hubo un problema al cargar las categorías."));
+      .catch(() =>
+        showError(
+          "There was a problem loading the categories. Please try again."
+        )
+      );
   }, []);
 
   const handleSelect = (cat: Category | null) => {

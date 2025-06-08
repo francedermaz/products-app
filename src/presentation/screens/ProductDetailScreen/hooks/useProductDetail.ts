@@ -24,7 +24,7 @@ export const useProductDetail = (productId: number) => {
 
   const handleError = (error: Error) => {
     setError(error);
-    showError("Hubo un problema al cargar el producto.");
+    showError("There was a problem loading the product. Please try again.");
     navigation.navigate("Home");
   };
 

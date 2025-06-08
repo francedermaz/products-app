@@ -22,7 +22,7 @@ export const useProducts = (
       const sorted = sortProducts(data, sort);
       setProducts(sorted);
     } catch (e) {
-      showError("Hubo un problema al cargar los productos.");
+      showError("There was a problem loading the products. Please try again."); 
     }
   }, [selectedCategory, sort]);
 
