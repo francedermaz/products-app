@@ -26,6 +26,8 @@ export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
     return;
   }
 
+  console.log(product);
+
   return (
     <ScreenHeader title={categoryName ?? ""} showBack>
       <ScrollView contentContainerStyle={styles.container}>
@@ -34,15 +36,30 @@ export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
         <Text style={styles.title}>{product?.title}</Text>
         <Text style={styles.description}>{product?.description}</Text>
 
-        <View style={styles.detailRow}>
-          <Text style={styles.label}>Brand:</Text>
-          <Text style={styles.value}>{product?.brand}</Text>
-        </View>
+        {product?.brand && (
+          <View style={styles.detailRow}>
+            <Text style={styles.label}>Brand:</Text>
+            <Text style={styles.value}>{product.brand}</Text>
+          </View>
+        )}
 
         <View style={styles.detailRow}>
           <Text style={styles.label}>Stock:</Text>
           <Text style={styles.value}>{product?.stock}</Text>
         </View>
+
+        {product?.rating && (
+          <View style={styles.detailRow}>
+            <Text style={styles.label}>Rating:</Text>
+            <Text style={styles.value}>{product.rating.toFixed(1)}</Text>
+          </View>
+        )}
+
+        {product?.price && (
+          <View style={styles.priceContainer}>
+            <Text style={styles.priceText}>${product.price.toFixed(2)}</Text>
+          </View>
+        )}
       </ScrollView>
     </ScreenHeader>
   );

@@ -42,4 +42,15 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
+  priceContainer: {
+    alignItems: "flex-end",
+    marginTop: 8,
+    marginRight: 16,
+    marginBottom: 8,
+  },
+  priceText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#222",
+  },
 });
