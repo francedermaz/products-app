@@ -1,0 +1,24 @@
+{
+  "common": {
+    "products": "Products"
+  },
+  "ProductDetailScreen": {
+    "brand": "Brand",
+    "stock": "Stock",
+    "rating": "Rating",
+    "error": "There was a problem loading the product. Please try again."
+  },
+  "ProductListScreen": {
+    "FilterBottomSheet": {
+      "sortBy": "Sort By",
+      "priceLowToHigh": "Price: Low to High",
+      "priceHighToLow": "Price: High to Low",
+      "ratingLowToHigh": "Rating: Low to High",
+      "ratingHighToLow": "Rating: High to Low"
+    },
+    "error": "There was a problem loading the products. Please try again."
+  },
+  "Categories": {
+    "error": "There was a problem loading the categories. Please try again."
+  }
+}

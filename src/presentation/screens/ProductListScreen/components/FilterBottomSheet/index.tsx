@@ -6,18 +6,34 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { SortOption } from "../../../../../domain/models/SortOption";
 import { FlatList } from "react-native-gesture-handler";
 import { FilterBottomSheetProps } from "../../types";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../../locales/i18n";
 
 const options: { label: string; value: SortOption }[] = [
-  { label: "Price: Low to High", value: SortOption.PriceAsc },
-  { label: "Price: High to Low", value: SortOption.PriceDesc },
-  { label: "Rating: Low to High", value: SortOption.RatingAsc },
-  { label: "Rating: High to Low", value: SortOption.RatingDesc },
+  {
+    label: i18n.t("ProductListScreen.FilterBottomSheet.priceLowToHigh"),
+    value: SortOption.PriceAsc,
+  },
+  {
+    label: i18n.t("ProductListScreen.FilterBottomSheet.priceHighToLow"),
+    value: SortOption.PriceDesc,
+  },
+  {
+    label: i18n.t("ProductListScreen.FilterBottomSheet.ratingLowToHigh"),
+    value: SortOption.RatingAsc,
+  },
+  {
+    label: i18n.t("ProductListScreen.FilterBottomSheet.ratingHighToLow"),
+    value: SortOption.RatingDesc,
+  },
 ];
 
 export const FilterBottomSheet = forwardRef<
   BottomSheetModal,
   FilterBottomSheetProps
 >(({ selectedOption, onChange }, ref) => {
+  const { t } = useTranslation();
+
   const renderSortItem = useCallback(
     ({ item }: { item: (typeof options)[number] }) => (
       <View>
@@ -45,7 +61,9 @@ export const FilterBottomSheet = forwardRef<
       style={styles.contentContainer}
       snapPoints={["35%"]}
     >
-      <Text style={styles.title}>Sort By</Text>
+      <Text style={styles.title}>
+        {t("ProductListScreen.FilterBottomSheet.sortBy")}
+      </Text>
 
       <FlatList
         data={options}

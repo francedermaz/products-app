@@ -15,11 +15,14 @@ import { ProductListScreenProps } from "../../navigation/types";
 import { Category, Product } from "../../../domain/models/Product";
 import { RefreshControl } from "react-native-gesture-handler";
 import { colors } from "../../../theme/colors";
+import { useTranslation } from "react-i18next";
 
 export const ProductListScreen = ({
   navigation,
   route,
 }: ProductListScreenProps) => {
+  const { t } = useTranslation();
+
   const [sort, setSort] = useState<SortOption>(SortOption.PriceAsc);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
@@ -62,7 +65,7 @@ export const ProductListScreen = ({
 
   return (
     <ScreenHeader
-      title="Products"
+      title={t("common.products")}
       right={
         <TouchableOpacity onPress={handleOpenSheet}>
           <MaterialIcons name="sort" size={20} color={colors.textPrimary} />

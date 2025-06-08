@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Category } from "../domain/models/Product";
 import { ProductRepositoryImpl } from "../data/repositories/ProductRepositoryImpl";
 import { showError } from "../utils/errors";
+import { useTranslation } from "react-i18next";
 
 type CategoriesContextType = {
   categories: Category[];
@@ -19,17 +20,15 @@ export const CategoriesProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const { t } = useTranslation();
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [selected, _setSelected] = useState<string | null>(null);
 
   useEffect(() => {
     ProductRepositoryImpl.getCategories()
       .then(setCategories)
-      .catch(() =>
-        showError(
-          "There was a problem loading the categories. Please try again."
-        )
-      );
+      .catch(() => showError(t("Categories.error")));
   }, []);
 
   const handleSelect = (cat: Category | null) => {

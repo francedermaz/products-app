@@ -4,11 +4,14 @@ import { ProductRepositoryImpl } from "../../../../data/repositories/ProductRepo
 import { SortOption } from "../../../../domain/models/SortOption";
 import { sortProducts } from "../../../../utils/sortProducts";
 import { showError } from "../../../../utils/errors";
+import { useTranslation } from "react-i18next";
 
 export const useProducts = (
   selectedCategory: string | null,
   sort: SortOption
 ) => {
+  const { t } = useTranslation();
+
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -22,7 +25,7 @@ export const useProducts = (
       const sorted = sortProducts(data, sort);
       setProducts(sorted);
     } catch (e) {
-      showError("There was a problem loading the products. Please try again."); 
+      showError(t("ProductListScreen.error"));
     }
   }, [selectedCategory, sort]);
 

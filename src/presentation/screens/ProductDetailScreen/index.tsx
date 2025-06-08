@@ -6,8 +6,10 @@ import { useProductDetail } from "./hooks/useProductDetail";
 import { useCategoriesContext } from "../../../context/CategoriesContext";
 import { ProductDetailScreenProps } from "../../navigation/types";
 import { colors } from "../../../theme/colors";
+import { useTranslation } from "react-i18next";
 
 export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
+  const { t } = useTranslation();
   const { product, loading, error } = useProductDetail(route.params.id);
   const { categories } = useCategoriesContext();
 
@@ -37,19 +39,19 @@ export const ProductDetailScreen = ({ route }: ProductDetailScreenProps) => {
 
         {product?.brand && (
           <View style={styles.detailRow}>
-            <Text style={styles.label}>Brand:</Text>
+            <Text style={styles.label}>{t("ProductDetailScreen.brand")}:</Text>
             <Text style={styles.value}>{product.brand}</Text>
           </View>
         )}
 
         <View style={styles.detailRow}>
-          <Text style={styles.label}>Stock:</Text>
+          <Text style={styles.label}>{t("ProductDetailScreen.stock")}:</Text>
           <Text style={styles.value}>{product?.stock}</Text>
         </View>
 
         {product?.rating && (
           <View style={styles.detailRow}>
-            <Text style={styles.label}>Rating:</Text>
+            <Text style={styles.label}>{t("ProductDetailScreen.rating")}:</Text>
             <Text style={styles.value}>{product.rating.toFixed(1)}</Text>
           </View>
         )}

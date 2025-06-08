@@ -6,6 +6,7 @@ import { CategoriesProvider } from "./src/context/CategoriesContext";
 import { configurePushNotifications } from "./src/notifications/notifications";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "./src/presentation/components/CustomToast";
+import "./src/locales/i18n";
 
 export default function App() {
   useEffect(() => {
